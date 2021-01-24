@@ -1,4 +1,4 @@
-# Welcome Orbit]
+# Welcome Orbit
 
 
 developer - Euna, Nill
