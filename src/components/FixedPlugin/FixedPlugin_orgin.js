@@ -5,9 +5,6 @@ import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 
-import logoBlack from "assets/img/logo_black.png";
-import logoColor from "assets/img/logo_color.png";
-
 import imagine1 from "assets/img/sidebar-1.jpg";
 import imagine2 from "assets/img/sidebar-2.jpg";
 import imagine3 from "assets/img/sidebar-3.jpg";
@@ -18,7 +15,6 @@ import Button from "components/CustomButtons/Button.js";
 export default function FixedPlugin(props) {
   const [classes, setClasses] = React.useState("dropdown show");
   const [bg_checked, setBg_checked] = React.useState(true);
-  const [logo, setLogo] = React.useState(props.logo);
   const [bgImage, setBgImage] = React.useState(props.bgImage);
   const handleClick = () => {
     props.handleFixedClick();
@@ -26,7 +22,7 @@ export default function FixedPlugin(props) {
   return (
     <div
       className={classnames("fixed-plugin", {
-        "rtl-fixed-plugin": props.rtlActive,
+        "rtl-fixed-plugin": props.rtlActive
       })}
     >
       <div id="fixedPluginClasses" className={props.fixedClasses}>
@@ -34,30 +30,6 @@ export default function FixedPlugin(props) {
           <i className="fa fa-cog fa-2x" />
         </div>
         <ul className="dropdown-menu">
-          <li className="header-title">LOGO CHANGE</li>
-          <li className={logo === logoBlack ? "active" : ""}>
-            <a
-              className="img-holder switch-trigger"
-              onClick={() => {
-                setLogo(logoBlack);
-                props.handleLogoClick(logoBlack);
-              }}
-            >
-              <img src={logoBlack} alt="..." />
-            </a>
-          </li>
-          <li className={logo === logoColor ? "active" : ""}>
-            <a
-              className="img-holder switch-trigger"
-              onClick={() => {
-                setLogo(logoColor);
-                props.handleLogoClick(logoColor);
-              }}
-            >
-              <img src={logoColor} alt="..." />
-            </a>
-          </li>
-
           <li className="header-title">SIDEBAR FILTERS</li>
           <li className="adjustments-line">
             <a className="switch-trigger">
@@ -165,6 +137,41 @@ export default function FixedPlugin(props) {
               <img src={imagine4} alt="..." />
             </a>
           </li>
+
+          <li className="button-container">
+            <div className="button-container">
+              <Button
+                color="success"
+                href="https://www.creative-tim.com/product/material-dashboard-react?ref=mdr-fixed-plugin"
+                target="_blank"
+                fullWidth
+              >
+                Download free!
+              </Button>
+            </div>
+          </li>
+          <li className="button-container">
+            <div className="button-container">
+              <Button
+                color="warning"
+                href="https://www.creative-tim.com/product/material-dashboard-pro-react?ref=mdr-fixed-plugin"
+                target="_blank"
+                fullWidth
+              >
+                Get PRO version
+              </Button>
+            </div>
+          </li>
+          <li className="button-container">
+            <Button
+              color="info"
+              fullWidth
+              href="https://demos.creative-tim.com/material-dashboard-react/#/documentation/tutorial?ref=mdr-fixed-plugin"
+              target="_blank"
+            >
+              Documentation
+            </Button>
+          </li>
           <li className="adjustments-line" />
         </ul>
       </div>
@@ -179,5 +186,5 @@ FixedPlugin.propTypes = {
   fixedClasses: PropTypes.string,
   bgColor: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
   handleColorClick: PropTypes.func,
-  handleImageClick: PropTypes.func,
+  handleImageClick: PropTypes.func
 };

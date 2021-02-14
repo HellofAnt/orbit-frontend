@@ -1,0 +1,3 @@
+[0207/154108.518:ERROR:registration_protocol_win.cc(102)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0207/154142.948:ERROR:registration_protocol_win.cc(102)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0207/161921.571:ERROR:registration_protocol_win.cc(102)] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
