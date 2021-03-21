@@ -14,13 +14,14 @@ const styles = {
     "&,& a,& a:hover,& a:focus": {
       color: "rgba(255,255,255,.62)",
       margin: "0",
-      fontSize: "14px",
+      fontSize: "1.5rem",
       marginTop: "0",
-      marginBottom: "0"
+      marginBottom: "0",
+      width: "300px",
     },
     "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
+      color: "#FFFFFF",
+    },
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -34,9 +35,51 @@ const styles = {
       color: "#777",
       fontSize: "65%",
       fontWeight: "400",
-      lineHeight: "1"
-    }
-  }
+      lineHeight: "1",
+    },
+  },
+
+  ////////////////////////////////////////
+  bigCard: {
+    alignItems: "center",
+    margin: "10px",
+    height: "100%",
+  },
+  tagDiv: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    width: "50%",
+    margin: "10px",
+  },
+  middleCard: {
+    width: "60px",
+    height: "60px",
+    textAlign: "center",
+    justifyContent: "center",
+    margin: "5px",
+  },
+  title: {
+    display: "block",
+    fontSize: "1.5rem",
+  },
+  newChallengeDiv: {
+    width: "95%",
+  },
+  newChallengeCard: {
+    margin: "5px",
+    overflow: "scroll",
+    flexDirection: "row",
+  },
+  challengeCard: {
+    width: "250px",
+    height: "250px",
+    margin: "0px 0px 5px 10px",
+    alignItems: "center",
+    justifyContent: "space-around",
+    flex: "0 0 auto",
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -44,69 +87,95 @@ const useStyles = makeStyles(styles);
 export default function TableList() {
   const classes = useStyles();
   return (
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
-          </CardHeader>
-          <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Name", "Country", "City", "Salary"]}
-              tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615"]
-              ]}
-            />
-          </CardBody>
+    <Card className={classes.bigCard}>
+      <div className={classes.tagDiv}>
+        <Card className={classes.middleCard}>
+          <div>Tag 1</div>
         </Card>
-      </GridItem>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card plain>
-          <CardHeader plain color="primary">
-            <h4 className={classes.cardTitleWhite}>
-              Table on Plain Background
-            </h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
-          </CardHeader>
-          <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["ID", "Name", "Country", "City", "Salary"]}
-              tableData={[
-                ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-                ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-                ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-                [
-                  "4",
-                  "Philip Chaney",
-                  "$38,735",
-                  "Korea, South",
-                  "Overland Park"
-                ],
-                [
-                  "5",
-                  "Doris Greene",
-                  "$63,542",
-                  "Malawi",
-                  "Feldkirchen in Kärnten"
-                ],
-                ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"]
-              ]}
-            />
-          </CardBody>
+        <Card className={classes.middleCard}>
+          <div>Tag 2</div>
         </Card>
-      </GridItem>
-    </GridContainer>
+        <Card className={classes.middleCard}>
+          <div>Tag 3</div>
+        </Card>
+      </div>
+      <div className={classes.newChallengeDiv}>
+        <div>
+          <p className={classes.title}>New Challenge</p>
+        </div>
+        <Card className={classes.newChallengeCard}>
+          <Card className={classes.challengeCard}>IMG</Card>
+          <Card className={classes.challengeCard}>IMG</Card>
+          <Card className={classes.challengeCard}>IMG</Card>
+          <Card className={classes.challengeCard}>IMG</Card>
+          <Card className={classes.challengeCard}>IMG</Card>
+          <Card className={classes.challengeCard}>IMG</Card>
+        </Card>
+      </div>
+    </Card>
+    // <GridContainer>
+    //   <GridItem xs={12} sm={12} md={12}>
+    //     <Card>
+    //       {/* <CardHeader color="primary">
+    //         <h4 className={classes.cardTitleWhite}>Simple Table</h4>
+    //         <p className={classes.cardCategoryWhite}>
+    //           Here is a subtitle for this table
+    //         </p>
+    //       </CardHeader> */}
+    //       <CardBody>
+    //         <Table
+    //           tableHeaderColor="primary"
+    //           tableHead={["Name", "Country", "City", "Salary"]}
+    //           tableData={[
+    //             ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
+    //             ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
+    //             ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+    //             ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
+    //             ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
+    //             ["Mason Porter", "Chile", "Gloucester", "$78,615"],
+    //           ]}
+    //         />
+    //       </CardBody>
+    //     </Card>
+    //   </GridItem>
+    //   <GridItem xs={12} sm={12} md={12}>
+    //     <Card plain>
+    //       <CardHeader plain color="primary">
+    //         <h4 className={classes.cardTitleWhite}>
+    //           Table on Plain Background
+    //         </h4>
+    //         <p className={classes.cardCategoryWhite}>
+    //           Here is a subtitle for this table
+    //         </p>
+    //       </CardHeader>
+    //       <CardBody>
+    //         <Table
+    //           tableHeaderColor="primary"
+    //           tableHead={["ID", "Name", "Country", "City", "Salary"]}
+    //           tableData={[
+    //             ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
+    //             ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
+    //             ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
+    //             [
+    //               "4",
+    //               "Philip Chaney",
+    //               "$38,735",
+    //               "Korea, South",
+    //               "Overland Park",
+    //             ],
+    //             [
+    //               "5",
+    //               "Doris Greene",
+    //               "$63,542",
+    //               "Malawi",
+    //               "Feldkirchen in Kärnten",
+    //             ],
+    //             ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"],
+    //           ]}
+    //         />
+    //       </CardBody>
+    //     </Card>
+    //   </GridItem>
+    // </GridContainer>
   );
 }
