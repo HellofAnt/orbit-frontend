@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import "./App.css";
 import Challenge from "./views/Challenge";
 
@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <Challenge />
     </div>
-  )
+  );
 }
 
 export default App;
