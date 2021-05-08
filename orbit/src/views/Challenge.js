@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import log from "img/test.png";
 import Navi from "components/Navi";
 function Copyright() {
   return (
@@ -30,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   nightMode: {
     backgroundColor: "rgb(30,30,30)",
     color: "white",
+  },
+  naviPadding: {
+    paddingLeft: "80px",
   },
   appBar: {
     justifyContent: "flex-end",
@@ -57,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
   cardMedia: {
     paddingTop: "56.25%", // 16:9
     filter: "grayscale(100)",
+    backgroundSize: "contain",
   },
   cardContent: {
     flexGrow: 1,
@@ -67,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let cards = new Array();
+let cards = [];
 let cardLength = 16;
 for (let i = 0; i < cardLength; i++) {
   cards.push(i);
@@ -80,16 +85,16 @@ function Challenge() {
     <React.Fragment>
       <CssBaseline />
       <Navi />
-      <AppBar className={classes.nightMode} position="relative">
+      <AppBar className={`${classes.nightMode} ${classes.naviPadding}`} position="relative">
         <Toolbar className={classes.appBar}>
           <Typography variant="h6" color="inherit" noWrap>
             Header
           </Typography>
         </Toolbar>
       </AppBar>
-      <main className={classes.nightMode}>
+      <main className={`${classes.nightMode} ${classes.naviPadding}`}>
         {/* Hero unit */}
-        <div className={(classes.heroContent, classes.nightMode)}>
+        <div className={classes.nightMode}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" gutterBottom>
               Album layout
@@ -120,7 +125,7 @@ function Challenge() {
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image title" />
+                  <CardMedia className={classes.cardMedia} image={log} title="Image title" />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       Heading
