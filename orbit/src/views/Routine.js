@@ -17,6 +17,10 @@ import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -108,12 +112,30 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     overflow: 'auto',
   },
-  left: {
+  contentWrap : {
     display: 'flex',
-    flexFlow: 'row wrap',
-    flex: 2,
+  },
+  contents: {
+    flexFlow: 'column wrap',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    margin: theme.spacing(1),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:93
+    height: 140,
+  },
+  cardContent: {
+    flexGrow: 1,
   },
 }));
 
@@ -123,6 +145,7 @@ const menuInfo = [
   { id: 'Calendar', icon: <CalendarTodayIcon /> },
   { id: 'Challenge', icon: <FlagIcon /> },
 ]
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function MiniDrawer() {
   const classes = useStyles();
@@ -198,109 +221,119 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <div className={classes.left}>
+        <div className={classes.contentWrap}>
+          <div className={classes.contents}>
             <Paper variant="outlined" className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Typography>
-                      graph
+                      <Typography variant="h5" component="h2" align="left">
+                      나의 루틴
                       </Typography>
                       <Typography>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                          donec massa sapien faucibus et molestie ac.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+                      ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
+                      facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+                      gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
+                      donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                      adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+                      Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
+                      imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
+                      arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
+                      donec massa sapien faucibus et molestie ac.
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-            </Grid>
-          </Paper>
-          <Paper variant="outlined" className={classes.paper}>
+              </Grid>
+            </Paper>
+            <Paper variant="outlined" className={classes.paper}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm container>
+                  <Grid item xs container spacing={2}>
+                    <Grid item xs>
+                      <Typography variant="h5" component="h2" align="left">
+                      진행중 챌린지
+                      </Typography>
+                      <Container className={classes.cardGrid} maxWidth="md">
+                        <Grid container spacing={4}>
+                        {cards.map((card) => (
+                            <Grid item key={card} xs={12} sm={6} md={4}>
+                              <Card className={classes.card}>
+                                <CardMedia
+                                  className={classes.cardMedia}
+                                  image="https://source.unsplash.com/random"
+                                  title="Image title"
+                                />
+                                <CardContent className={classes.cardContent}>
+                                  <Typography>
+                                      This is a media card. You can use this section to describe the content.
+                                  </Typography>
+                                </CardContent>
+                              </Card>
+                           </Grid>
+                        ))}
+                        </Grid>
+                    </Container>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Paper>
+          </div>
+          <div className={classes.contents}>
+            <Paper variant="outlined" className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Typography>
-                      challenge
+                      <Typography variant="h5" component="h2" align="left">
+                      오늘의 루틴
                       </Typography>
                       <Typography>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                          donec massa sapien faucibus et molestie ac.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+                      ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
+                      facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+                      gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
+                      donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                      adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+                      Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
+                      imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
+                      arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
+                      donec massa sapien faucibus et molestie ac.
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-            </Grid>
-          </Paper>
-        </div>
-        <div className={classes.left}>
-          <Paper variant="outlined" className={classes.paper}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm container>
-                <Grid item xs container direction="column" spacing={2}>
-                  <Grid item xs>
-                    <Typography>
-                    today routine
-                    </Typography>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                        ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                        facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                        gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                        donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                        adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                        Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                        imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                        arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                        donec massa sapien faucibus et molestie ac.
-                    </Typography>
+              </Grid>
+            </Paper>
+            <Paper variant="outlined" className={classes.paper}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm container>
+                  <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs>
+                      <Typography variant="h5" component="h2" align="left">
+                      도전중인 챌린지
+                      </Typography>
+                      <Typography>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+                      ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
+                      facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+                      gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
+                      donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
+                      adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+                      Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
+                      imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
+                      arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
+                      donec massa sapien faucibus et molestie ac.
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-          </Grid>
-        </Paper>
-        <Paper variant="outlined" className={classes.paper}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm container>
-                <Grid item xs container direction="column" spacing={2}>
-                  <Grid item xs>
-                    <Typography>
-                    progress
-                    </Typography>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                        ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                        facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                        gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                        donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                        adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                        Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                        imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                        arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                        donec massa sapien faucibus et molestie ac.
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-          </Grid>
-        </Paper>
+            </Paper>
+          </div>
         </div>
         <Box pt={4}>
         <Copyright />
