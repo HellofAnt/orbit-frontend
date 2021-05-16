@@ -31,7 +31,7 @@ function Navi() {
   return (
     <div className={classes.sideBar}>
       <div>
-        <Link to="/Test">
+        <Link to="/">
           <img className={classes.iconSize} src={log} alt="{alt}"></img>
         </Link>
       </div>
