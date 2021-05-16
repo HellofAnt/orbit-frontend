@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Bar } from 'react-chartjs-2';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
@@ -29,6 +30,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import LoopIcon from '@material-ui/icons/Loop';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import FlagIcon from '@material-ui/icons/Flag';
+import Chart from 'chart.js/auto';
 
 function Copyright() {
   return (
@@ -110,6 +112,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
+    width: theme.spacing(100),
     overflow: 'auto',
   },
   contentWrap : {
@@ -147,7 +150,101 @@ const menuInfo = [
 ]
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function MiniDrawer() {
+const data = {
+  labels: ['건강', '재태크', '취미', '교육'],
+  datasets: [
+    {
+      data: [65, 59, 80, 81],
+      backgroundColor: [
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+      ],
+      borderColor: [
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+      ],
+      borderWidth : 1,
+    },
+  ],
+};
+
+const options = {
+  indexAxis: 'y',
+  responsive: true,
+  plugins: {
+    legend: false,
+    title: {
+      display: false,
+    },
+    datalabels: {
+      //color: 'black',
+      display: false,
+    },
+  },
+};
+
+let labels = ['건강', '재태크', '취미', '교육'];
+let chartData = [65, 59, 80, 81];
+let backgroundColor = [
+  'rgba(255, 159, 64, 0.2)',
+  'rgba(255, 205, 86, 0.2)',
+  'rgba(75, 192, 192, 0.2)',
+  'rgba(54, 162, 235, 0.2)',
+];
+let borderColor = [
+  'rgb(255, 159, 64)',
+  'rgb(255, 205, 86)',
+  'rgb(75, 192, 192)',
+  'rgb(54, 162, 235)',
+];
+
+let chart = new Chart('chart', {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      data: chartData
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+  	legend: false,
+    tooltip: false,
+    plugins: {
+      datalabels: {
+        align: function(context) {
+        	var index = context.dataIndex;
+          var value = context.dataset.data[index];
+          var invert = Math.abs(value) <= 1;
+          return value < 1 ? 'end' : 'start'
+        },
+        anchor: 'end',
+        backgroundColor: null,
+        borderColor: null,
+        borderRadius: 4,
+        borderWidth: 1,
+        color: '#223388',
+        font: {
+          size: 11,
+          weight: 600
+        },
+        offset: 4,
+        padding: 0,
+        formatter: function(value) {
+        	return Math.round(value * 10) / 10
+        }
+      }
+    }
+  }
+});
+
+export default function Routine() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -212,10 +309,14 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {menuInfo.map((menu, index) => (
-            <ListItem button key={menu.id}>
-              <ListItemIcon>{menu.icon}</ListItemIcon>
-              <ListItemText primary={menu.id} />
-            </ListItem>
+          <div>
+            <Link to={`/${menu.id}`}>
+              <ListItem button key={menu.id}>
+                <ListItemIcon>{menu.icon}</ListItemIcon>
+                <ListItemText primary={menu.id} />
+              </ListItem>
+            </Link>
+          </div>
           ))}
         </List>
       </Drawer>
@@ -232,16 +333,7 @@ export default function MiniDrawer() {
                       나의 루틴
                       </Typography>
                       <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                      ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                      facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                      gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                      donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                      adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                      Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                      imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                      arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                      donec massa sapien faucibus et molestie ac.
+                        <Bar data={data} options={options} />
                       </Typography>
                     </Grid>
                   </Grid>
