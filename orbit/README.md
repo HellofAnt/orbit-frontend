@@ -25,3 +25,6 @@ git branch -d feature/routine
 ```
 git push origin develop
 ```
+
+## References
+* https://nvie.com/posts/a-successful-git-branching-model/
