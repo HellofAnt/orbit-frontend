@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Bar } from 'react-chartjs-2';
@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Badge from '@material-ui/core/Badge';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+import LinkUI from "@material-ui/core/Link";
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -30,7 +30,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import LoopIcon from '@material-ui/icons/Loop';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import FlagIcon from '@material-ui/icons/Flag';
+import { Link } from "react-router-dom";
 import Chart from 'chart.js/auto';
+import Graph from "../components/Graph"
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 function Copyright() {
   return (
@@ -150,10 +153,17 @@ const menuInfo = [
 ]
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+const categories = [
+  { name: '건강', color: '#FF9F40' },
+  { name: '재태크', color: '#FFCD56' },
+  { name: '취미', color: '#4BC0C0' },
+  { name: '교육', color: '#36A2EB' },
+]
+
+const labels = ['건강', '재태크', '취미', '교육'];
 const data = {
-  labels: ['건강', '재태크', '취미', '교육'],
-  datasets: [
-    {
+  labels: labels,
+  datasets: [{
       data: [65, 59, 80, 81],
       backgroundColor: [
         'rgba(255, 159, 64, 0.2)',
@@ -168,8 +178,7 @@ const data = {
         'rgb(54, 162, 235)',
       ],
       borderWidth : 1,
-    },
-  ],
+    },],
 };
 
 const options = {
@@ -178,71 +187,23 @@ const options = {
   plugins: {
     legend: false,
     title: {
-      display: false,
+      //display: false,
     },
     datalabels: {
-      //color: 'black',
       display: false,
+    },
+    tooltips: {
+      enabled: false,
     },
   },
 };
 
-let labels = ['건강', '재태크', '취미', '교육'];
-let chartData = [65, 59, 80, 81];
-let backgroundColor = [
-  'rgba(255, 159, 64, 0.2)',
-  'rgba(255, 205, 86, 0.2)',
-  'rgba(75, 192, 192, 0.2)',
-  'rgba(54, 162, 235, 0.2)',
-];
-let borderColor = [
-  'rgb(255, 159, 64)',
-  'rgb(255, 205, 86)',
-  'rgb(75, 192, 192)',
-  'rgb(54, 162, 235)',
-];
-
-let chart = new Chart('chart', {
+/*let ctx = document.getElementById('chart').getContext('2d');
+let myChart = new Chart(ctx, {
   type: 'bar',
-  data: {
-    labels: labels,
-    datasets: [{
-      backgroundColor: backgroundColor,
-      borderColor: borderColor,
-      data: chartData
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-  	legend: false,
-    tooltip: false,
-    plugins: {
-      datalabels: {
-        align: function(context) {
-        	var index = context.dataIndex;
-          var value = context.dataset.data[index];
-          var invert = Math.abs(value) <= 1;
-          return value < 1 ? 'end' : 'start'
-        },
-        anchor: 'end',
-        backgroundColor: null,
-        borderColor: null,
-        borderRadius: 4,
-        borderWidth: 1,
-        color: '#223388',
-        font: {
-          size: 11,
-          weight: 600
-        },
-        offset: 4,
-        padding: 0,
-        formatter: function(value) {
-        	return Math.round(value * 10) / 10
-        }
-      }
-    }
-  }
-});
+  data: data,
+  options: options,
+});*/
 
 export default function Routine() {
   const classes = useStyles();
@@ -256,6 +217,11 @@ export default function Routine() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [completed, setCompleted] = useState(0);
+  useEffect(() => {
+    setCompleted(Math.floor(Math.random() * 100) + 1);
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -308,7 +274,7 @@ export default function Routine() {
         </div>
         <Divider />
         <List>
-          {menuInfo.map((menu, index) => (
+          {menuInfo.map((menu) => (
           <div>
             <Link to={`/${menu.id}`}>
               <ListItem button key={menu.id}>
@@ -384,16 +350,9 @@ export default function Routine() {
                       오늘의 루틴
                       </Typography>
                       <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                      ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                      facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                      gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                      donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                      adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                      Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                      imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                      arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                      donec massa sapien faucibus et molestie ac.
+                      {categories.map((category) => (
+                        <Graph bgcolor={category.color} completed={completed} category={category.name} />
+                      ))}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -409,16 +368,7 @@ export default function Routine() {
                       도전중인 챌린지
                       </Typography>
                       <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                      ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                      facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                      gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                      donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                      adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                      Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                      imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                      arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                      donec massa sapien faucibus et molestie ac.
+                        <LinearProgress />
                       </Typography>
                     </Grid>
                   </Grid>
