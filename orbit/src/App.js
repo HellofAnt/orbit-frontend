@@ -76,6 +76,9 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9) + 1,
     },
   },
+  sideNav: {
+    padding: 8,
+  },
   toolbar: {
     display: "flex",
     alignItems: "center",
@@ -186,7 +189,7 @@ function App() {
         <Divider />
         <List>
           {menuInfo.map((menu, index) => (
-            <div>
+            <div className={classes.sideNav}>
               <Link to={`/${menu.id}`}>
                 <ListItem button key={menu.id}>
                   <ListItemIcon>{menu.icon}</ListItemIcon>

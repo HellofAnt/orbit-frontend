@@ -23,11 +23,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
   },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-    marginLeft: "70px",
-  },
   heroButtons: {
     marginTop: theme.spacing(4),
   },
@@ -39,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    backgroundColor: "rgb(80,80,80)",
+    color: "white",
+    borderRadius: "15px",
   },
   tagCard: {
     width: "70px",
@@ -48,8 +46,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     paddingTop: "56.25%", // 16:9
+    margin: "20px",
     filter: "grayscale(100)",
     backgroundSize: "contain",
+    backgroundColor: "white",
+    borderRadius: "10px",
   },
   cardContent: {
     flexGrow: 1,
@@ -83,20 +84,6 @@ function Challenge() {
             <Typography variant="h5" align="center" paragraph>
               Work 'till 5
             </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
@@ -108,18 +95,14 @@ function Challenge() {
                   <CardMedia className={classes.cardMedia} image={log} title="Image title" />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      첼린지 제목
                     </Typography>
-                    <Typography>This is a media card. You can use this section to describe the content.</Typography>
+                    <Typography>해당 첼린지 간단 소개 문단입니다. 해당 첼린지 간단 소개 문단입니다.</Typography>
+                    <div>
+                      <div>리더 닉네임</div>
+                      <div>첼린지 기간</div>
+                    </div>
                   </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions>
                 </Card>
               </Grid>
             ))}
